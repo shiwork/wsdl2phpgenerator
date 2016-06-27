@@ -140,6 +140,10 @@ class Generator implements GeneratorInterface
         foreach ($types as $typeNode) {
             $type = null;
 
+            if (in_array(Validator::validateType($typeNode->getName()), array('string', 'int', 'float', 'boolean'))) {
+                continue;
+            }
+
             if ($typeNode->isComplex()) {
                 if ($typeNode->isArray()) {
                     $type = new ArrayType($this->config, $typeNode->getName());
